@@ -62,9 +62,9 @@ function wp_bootstrap_pagination( $args = array() ) {
     if ( !empty($min) && !empty($max) ) {
         for( $i = $min; $i <= $max; $i++ ) {
             if ($page == $i) {
-                $echo .= '<li class="active"><span class="active">' . str_pad( (int)$i, 2, '0', STR_PAD_LEFT ) . '</span></li>';
+                $echo .= '<li class="active"><span class="active">' . $i . '</span></li>';
             } else {
-                $echo .= sprintf( '<li><a href="%s">%002d</a></li>', esc_attr( get_pagenum_link($i) ), $i );
+                $echo .= '<li><a href="'.esc_attr( get_pagenum_link($i) ).'">'.$i.'</a></li>';
             }
         }
     }
