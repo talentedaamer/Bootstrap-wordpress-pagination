@@ -8,8 +8,8 @@ function wp_bootstrap_pagination( $args = array() ) {
     $defaults = array(
         'range'           => 4,
         'custom_query'    => FALSE,
-        'previous_string' => __( '<i class="glyphicon glyphicon-chevron-left"></i>', 'text-domain' ),
-        'next_string'     => __( '<i class="glyphicon glyphicon-chevron-right"></i>', 'text-domain' ),
+        'previous_string' => __( 'Previous', 'text-domain' ),
+        'next_string'     => __( 'Next', 'text-domain' ),
         'before_output'   => '<div class="post-nav"><ul class="pager">',
         'after_output'    => '</ul></div>'
     );
