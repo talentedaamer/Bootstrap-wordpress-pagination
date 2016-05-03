@@ -75,7 +75,7 @@ function wp_bootstrap_pagination( $args = array() ) {
         $echo .= '<li><a href="' . $next . '" title="' . __( 'next', 'text-domain') . '">' . $args['next_string'] . '</a></li>';
     
     $lastpage = esc_attr( get_pagenum_link($count) );
-    if ( $lastpage ) {
+    if ( $count > $page ) {
         $echo .= '<li class="next"><a href="' . $lastpage . '">' . __( 'Last', 'text-domain' ) . '</a></li>';
     }
 
