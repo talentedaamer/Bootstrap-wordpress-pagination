@@ -2,7 +2,7 @@
 /**
  * WordPress Bootstrap Pagination
  */
-
+ 
 function wp_bootstrap_pagination( $args = array() ) {
     
     $defaults = array(
@@ -10,8 +10,8 @@ function wp_bootstrap_pagination( $args = array() ) {
         'custom_query'    => FALSE,
         'previous_string' => __( 'Previous', 'text-domain' ),
         'next_string'     => __( 'Next', 'text-domain' ),
-        'before_output'   => '<div class="post-nav"><ul class="pager">',
-        'after_output'    => '</ul></div>'
+        'before_output'   => ' <ul class="pagination justify-content-center">',
+        'after_output'    => '</ul>'
     );
     
     $args = wp_parse_args( 
@@ -54,29 +54,32 @@ function wp_bootstrap_pagination( $args = array() ) {
     
     $firstpage = esc_attr( get_pagenum_link(1) );
     if ( $firstpage && (1 != $page) )
-        $echo .= '<li class="previous"><a href="' . $firstpage . '">' . __( 'First', 'text-domain' ) . '</a></li>';
+        $echo .= ' <li class="page-item"><a class="page-link" href="' . $firstpage . '" aria-label="Previous"><span aria-hidden="true">' . __( 'First', 'text-domain' ) . '</span></a></li>';
+
 
     if ( $previous && (1 != $page) )
-        $echo .= '<li><a href="' . $previous . '" title="' . __( 'previous', 'text-domain') . '">' . $args['previous_string'] . '</a></li>';
+        $echo .= '<li class="page-item"><a class="page-link" href="' . $previous . '" title="' . __( 'previous', 'text-domain') . '">' . $args['previous_string'] . '</a></li>';
     
-    if ( !empty($min) && !empty($max) ) {
+
+     if ( !empty($min) && !empty($max) ) {
         for( $i = $min; $i <= $max; $i++ ) {
             if ($page == $i) {
-                $echo .= '<li class="active"><span class="active">' . str_pad( (int)$i, 2, '0', STR_PAD_LEFT ) . '</span></li>';
+                $echo .= '<li class="page-item active"><a class="page-link" href="%s"><span class="sr-only">(current)</span>' . str_pad( (int)$i, 2, '0', STR_PAD_LEFT ) . '</span></li>';
             } else {
-                $echo .= sprintf( '<li><a href="%s">%002d</a></li>', esc_attr( get_pagenum_link($i) ), $i );
+                $echo .= sprintf( '<li class="page-item"><a class="page-link" href="%s">%002d<span class="sr-only">(current)</span></a></li>', esc_attr( get_pagenum_link($i) ), $i );
             }
         }
     }
-    
+   
+   
     $next = intval($page) + 1;
     $next = esc_attr( get_pagenum_link($next) );
     if ($next && ($count != $page) )
-        $echo .= '<li><a href="' . $next . '" title="' . __( 'next', 'text-domain') . '">' . $args['next_string'] . '</a></li>';
+        $echo .= '<li class="page-item"><a class="page-link" href="' . $next . '" title="' . __( 'next', 'text-domain') . '">' . $args['next_string'] . '</a></li>';
     
     $lastpage = esc_attr( get_pagenum_link($count) );
     if ( $lastpage ) {
-        $echo .= '<li class="next"><a href="' . $lastpage . '">' . __( 'Last', 'text-domain' ) . '</a></li>';
+        $echo .= '<li class="page-item"><a class="page-link" href="' . $lastpage . '" aria-label="Next"><span aria-hidden="true">' . __( 'Last', 'text-domain' ) . '</span></a></li>';
     }
 
     if ( isset($echo) )
